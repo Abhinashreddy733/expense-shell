@@ -40,16 +40,16 @@ systemctl enable mysqld &>> $LOGS_FILE
 VALIDATE $? "Enabling Mysql Server"
 
 systemctl start mysqld &>> $LOGS_FILE
-VALIDAET $? "Starting Mysql Server"
+VALIDATE $? "Starting Mysql Server"
 
 #In place of hostname we  should give Ip address or Domain name
-mysqld -h 44.201.174.43 -u root -pExpenseApp@1 -e 'show databases' &>> $LOGS_FILE
+mysql -h 44.201.174.43 -u root -pExpenseApp@1 -e 'show databases' &>> $LOGS_FILE
 
 if [ $? -ne 0 ]
 then
 echo "Mysql server root password is not setup, setting up now" &>> $LOGS_FILE
 mysql_secure_installation --set-root-pass ExpenseApp@1
-VALIDAET $? "Setting up mysql root password done"
+VALIDATE $? "Setting up mysql root password done"
 else
 echo -e "MySQL root password is already setup...$Y SKIPPING $N" | tee -a $LOG_FILE
 fi
