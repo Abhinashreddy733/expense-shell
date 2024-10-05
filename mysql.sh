@@ -30,7 +30,7 @@ VALIDATE(){
     fi
 }
 
-echo "Script started executing at:" $date | tee -a $LOGS_FILE
+echo "Script started executing at:($date)" | tee -a $LOGS_FILE
 CHECK_ROOT
 
 dnf install mysql-server -y &>> $LOGS_FILE
