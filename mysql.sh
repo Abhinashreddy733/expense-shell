@@ -6,14 +6,14 @@ TIMESTAMP=$(date +%Y-%m-%d-%H-%M%S)
 LOGS_FILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIMESTAMP.log"
 mkdir -p $LOGS_FOLDER
 
-USERID=$ [ id -u ]
+USERID=$(id -u)
 R="\e[31m"
 G="\e[32m"
 N="\e[0m"
 Y="\e[33m"
 
 CHECK_ROOT(){
-    if [ id -ne 0 ]
+    if [ $USERID -ne 0 ]
      then
       echo -e "$R Please run the script using root preveliges $N" | tee -a $LOGS_FILE
       exit 1 
@@ -43,7 +43,7 @@ systemctl start mysqld &>> $LOGS_FILE
 VALIDAET $? "Starting Mysql Server"
 
 #In place of hostname we  should give Ip address or Domain name
-mysqld -h mysql.abhidomain.online -u root -pExpenseApp@1 -e 'show databases' &>> $LOGS_FILE
+mysqld -h 44.201.174.43 -u root -pExpenseApp@1 -e 'show databases' &>> $LOGS_FILE
 
 if [ $? -ne 0 ]
 then
